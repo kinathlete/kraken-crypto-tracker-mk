@@ -1,17 +1,16 @@
-import requests
-from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
-import json
-import pandas as pd
+from typing import final
+from pandas.core.indexes import period
 import os
+from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 
-import datetime
-import pytz
-
+import pandas as pd
 import gspread as gs
+import gspread_dataframe as gd
 from oauth2client.service_account import ServiceAccountCredentials
 
 from pathlib import Path
 from dataclasses import dataclass, asdict
+from cryptowatch.api_client import Client
 
 # CREATHE THE DATACLASS SCHEMA
 @dataclass
@@ -37,6 +36,8 @@ class KrakenTicker:
 
 def main():
 
+    client = Client()
+
     print("Starting the update run.")
 
     # Create a Google Cloud connection
@@ -44,52 +45,50 @@ def main():
     path_to_key_file = Path("." + os.sep + gc_keys_file_name + ".json")
     gc = gs.service_account(filename=path_to_key_file)
 
-    pairs = ['ETHCHF','XETHZEUR', 'ADAEUR', 'DOTEUR']
-    rows = []
+    pairs = ['ethchf', 'etheur', 'adaeur', 'doteur']
+    dfs = []
 
     # Get data from Kraken
-    try:
-        for p in pairs:
-            response = requests.get(f'https://api.kraken.com/0/public/Ticker?pair={p}')
-            json_data = json.loads(response.text)
-            res = json_data['result']
-            row = KrakenTicker(
-                timestamp = datetime.datetime.now(pytz.timezone('Europe/Zurich')).strftime("%x %X"),
-                symbol = p,
-                ask_price = res[f'{p}']['a'][0],
-                ask_lot_vol = res[f'{p}']['a'][2],
-                bid_price = res[f'{p}']['b'][0],
-                bid_lot_vol = res[f'{p}']['b'][2],
-                volume_today = res[f'{p}']['v'][0],
-                volume_last24h = res[f'{p}']['v'][1],
-                number_of_trades_today = res[f'{p}']['t'][0],
-                number_of_trades_last24h = res[f'{p}']['t'][1],
-                low_today = res[f'{p}']['l'][0],
-                low_last24h = res[f'{p}']['l'][1],
-                high_today = res[f'{p}']['h'][0],
-                high_last24h = res[f'{p}']['h'][1],
-                day_opening_price = res[f'{p}']['o']
-            )
-            rows.append(row)
-        
-        print(rows)
-            
-    # Catch error if any
-    except (ConnectionError, Timeout, TooManyRedirects) as e:
-        print(e)
+    for p in pairs:
+
+        before_unix = 1633069800
+        after_unix = 1627799400
+        periods = 3600
+
+        data = {
+            'exchange': 'kraken',
+            'pair': p,
+            'route': 'ohlc',
+            'params': {
+                'before': before_unix,
+                'after': after_unix,
+                'periods': periods
+            }
+        }
+
+        response = client.get_markets(data=data)
+        print(response['allowance'])
+        res = response['result']['3600']
+        df_new = pd.DataFrame(data=res, columns=['Timestamp', 'OpenPrice', 'HighPrice', 'LowPrice', 'ClosePrice', 'Volume', 'QuoteVolume'])
+        df_new['Pair'] = p
+        print(df_new)
+        dfs.append(df_new)
+
+    df_final = pd.concat(dfs)
+    print(df_final)
 
     # Connect to Google Sheet and insert data in the first empty row
     try:
-        sh = gc.open_by_key('1jI1wM5xFvI5jgzQ-dZR_RjlCP6tTltKOCEVirWl1a-c')
+        sh = gc.open_by_key('1KfRklC5OK01nd5oqnaxvOIUlR5-V5Lco8fQuokwlVaw')
         ws = sh.worksheet('quotes')
-        last_row_number = len(ws.col_values(1)) + 1
-        ready_rows = [list(asdict(row).values()) for row in rows]
-        ws.append_rows(ready_rows)
+        current = gd.get_as_dataframe(ws)
+        updated = current.append(df_final)
+        gd.set_with_dataframe(ws, updated)
+        print("Data updated.")
 
     except gs.exceptions.APIError as e:
         print(e)
-
-    print("Data updated.")
+        print("Data not updated!")
 
 if __name__ == '__main__':
     main()
