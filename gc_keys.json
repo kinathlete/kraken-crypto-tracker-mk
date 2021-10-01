@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "crypto-325107",
+    "private_key_id": "9ebadd801b1dadd86123d10c1cc00cc45f371fa6",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCROC6nw9+h5miu\n8PoTf7zo0gG2XIZnuNsWhAQ9WSfqqSYN8QW7lpu+gvFb1PLUpfs0AEgpg7wA58P+\nrzfu5x57QpztxJ8nUVeE5JKzs1GfYAHRepzj3gg+kNEDBQs/3YY6skxQhsm+B1kP\ndva6pP5At651fq4mV0B1viCqGmGu1qHWcsqRKLHZnDsIGUrNYY45FCPTI5ciHlBp\nq8aeR98xBNsSghqcLS3V4UQVqHhKQgGmeYUAlL7a8d/JMWxy2pnnPYPdoJvjOuNf\n/NiQpC1g9r0Dh9kDPrkdG1JGuhfQ8m1sPaUI5TGbTADQqU7sDqyiMwyqjbD22JoS\n6T3lofQNAgMBAAECggEAAaSeloRXU+gc+Bm+4piX5RR3M36BgMvtIqiUubL4CiYm\nyZKYC4LNOU8W9wCGTNSh7nkwV9PnPSViKNAHtHrF9AQRbXlDibjYYicJ5+GYA1Md\nQib+fm+FLVwLGVslwO+7NI/O4DxeLPm9Trj8WqlCPS422Zp40vM6xfpEOVh6EXXU\n2V+wzgO+yUZnsP+Bsw6bc+8crkRt5wJWjAaAhwlKXljyjCtXnKSaOKEJ6DG0rgAO\n1NGSDhutvZvkEc38ZvoEjfPa66r1yminsp3eLSYfSoWJNXKDSy5PpTi8YGb0xkyI\nfBBwKsw50Lkiz/SDpkmTuuIgGehKvmLqSQhk4TrgUQKBgQDLbhpv9QvivAR8+L+6\n2y0TRNQfevqp/wbA7LIvjxMNXwhYDUiVRBf7+aOblpdBijsoCORssH9DDb8QoX6D\nOv2h+zAw9tXOzcRU5w/6LsvyN59jRh7q2OUHQVP9dr0uQjjZen2pHc6YEcmLM/7U\n7LvGB6LMb4X4QdfPcZslJG1ZGQKBgQC2vykqjLtYhDzIGwUU2Ah1Pkhvlb+RUqcp\n3D73Xqz/hIrKGc4NYEtx/wVe4OfT8Ed4IEq87v0yKjJm/vDPrtP7Nk+npspMLf6L\n9joaRs/3RV2odjZw8mJiyS0lHu82zfio+IJHGbvCz8i0alHigLZ/j7z3MyBavQ/A\nHjjk7MptFQKBgEcetx9tDDq4gNkwHde1yIx0A7T9yaSlBDduiN0XqBGEp+Ygvr9w\njvII1KoQe9DuAsB8W1+kVNmcdK/bxd8bQJDgwHhd02H5jiognfVZZvPHfnG2khiI\nu4lNzY9Pc9Q4Uqe1qzj0ssV3cn64Lt9B5GPXR5MxaiTg4BImJZdWpOQBAoGBAIWH\n0r2rjW0VWxBgZesgG7YHp4gZZJv8R/cXXs8D1+bw4zTffCdb+GS4kiUMs3iydpZ5\nCgNZoZrZKHEH0c//EBfcTIHVJrZZWUjNxxDSMz2b6t6gWhFXmrpSA3G/U8243Pwi\ncZcgX4juqNnjYifeIvu8fLgoHHkQ8oRP0QS9XQAtAoGALPUmde1aPnqjCcuUrCsb\nGdpzSKwiSBXKmPJ/UFduGgx7/X1i0HJg08j4Losq/gF8RgfTkk1RBJ+na4YFy2D7\nWxqRidjvFq5tP7vxKdEkqNjXoTfI2yP0K8+Y5BFrlvnFrcQ/1dTpVE2CBU99KDUj\nKtIZc5qi+g2Mnmn7IAfPxfs=\n-----END PRIVATE KEY-----\n",
+    "client_email": "kraken-crypto-test@crypto-325107.iam.gserviceaccount.com",
+    "client_id": "103995382928767388597",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kraken-crypto-test%40crypto-325107.iam.gserviceaccount.com"
+}
+  
